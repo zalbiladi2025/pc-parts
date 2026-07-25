@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل القطع | مرجع قطع الحاسوب الداخلية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="circuit-bg" aria-hidden="true"></div>
+
+<!-- ===== شريط تنقّل علوي ثابت ===== -->
+<header class="topnav">
+  <div class="topnav-inner">
+    <a href="#top" class="brand-mini">
+      <span class="brand-chip">PCB//REF</span>
+      <span>دليل القطع</span>
+    </a>
+    <nav class="pill-nav" id="pillNav"><!-- تُبنى ديناميكياً --></nav>
+    <a class="btn btn-ghost btn-sm" href="https://USERNAME.github.io/pc-builder-game/" target="_blank" rel="noopener">
+      جرّب لعبة التجميع ↗
+    </a>
+  </div>
+</header>
+
+<div class="app" id="top">
+
+  <!-- ===== البطل: مخطط تشريحي تفاعلي ===== -->
+  <section class="hero">
+    <span class="eyebrow">المرجع الرسمي · إجابة تمرين "ورشة التجميع"</span>
+    <h1>تعرّف على كل قطعة قبل أن تختارها</h1>
+    <p class="hero-sub">
+      هذا الدليل يشرح ثماني قطع أساسية داخل أي حاسوب: وظيفتها، مواصفاتها التي تقرأها عند الشراء،
+      ونصيحة التوافق المرتبطة بها — وهي نفسها القواعد التي تحتاجها لحلّ تمرين "ورشة التجميع".
+    </p>
+
+    <div class="hotspot-board" id="hotspotBoard" aria-label="اختر قطعة لعرض تفاصيلها">
+      <!-- تُبنى ديناميكياً بواسطة script.js -->
+    </div>
+    <p class="hotspot-hint">اضغط على أي قطعة في المخطط للانتقال إلى شرحها بالأسفل ⤵</p>
+  </section>
+
+  <!-- ===== أقسام القطع ===== -->
+  <main id="sections"><!-- تُبنى ديناميكياً --></main>
+
+  <!-- ===== ملخص سريع للمراجعة قبل التمرين ===== -->
+  <section class="cheat-sheet">
+    <span class="eyebrow">قبل أن تبدأ اللعبة</span>
+    <h2>ملخّص قواعد التوافق الخمس</h2>
+    <div class="cheat-grid" id="cheatGrid"><!-- تُبنى ديناميكياً --></div>
+    <a class="btn btn-primary" href="https://USERNAME.github.io/pc-builder-game/" target="_blank" rel="noopener">
+      انتقل إلى تمرين ورشة التجميع
+    </a>
+  </section>
+
+  <footer class="foot">
+    <span>دليل القطع — مادة تدريبية داخلية لدرس قطع الحاسوب، مرجع لتمرين "ورشة التجميع"</span>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
