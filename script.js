@@ -2,6 +2,37 @@
    دليل القطع — البيانات ومنطق العرض
    ========================================================= */
 
+/* ---------------------------------------------------------
+   صور حقيقية لكل قطعة (مصدرها Unsplash، رخصة استخدام مجانية
+   تسمح بالاستخدام التجاري وغير التجاري دون الحاجة لإذن)
+   --------------------------------------------------------- */
+const photos = {
+  cpu:         "https://images.unsplash.com/photo-1670751782084-dffc982dc63b?auto=format&fit=crop&w=900&q=80",
+  motherboard: "https://images.unsplash.com/photo-1733741020205-1ed0208314b6?auto=format&fit=crop&w=900&q=80",
+  ram:         "https://images.unsplash.com/photo-1672923491001-3e58a608e418?auto=format&fit=crop&w=900&q=80",
+  gpu:         "https://images.unsplash.com/photo-1520520688967-7bdc16e77dc2?auto=format&fit=crop&w=900&q=80",
+  storage:     "https://images.unsplash.com/photo-1677086586945-ef95ab632232?auto=format&fit=crop&w=900&q=80",
+  psu:         "https://images.unsplash.com/photo-1756576170672-1123237f1d77?auto=format&fit=crop&w=900&q=80",
+  cooling:     "https://images.unsplash.com/photo-1513366884929-f0b3bedfb653?auto=format&fit=crop&w=900&q=80",
+  case:        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80"
+};
+
+/* دالة بسيطة تحدد أيقونة مناسبة لكل بطاقة مواصفة حسب كلمات مفتاحية في عنوانها */
+function getSpecIcon(label){
+  const map = [
+    [/نواة|Core/i, "⚙️"], [/تردد|Clock|Speed|سرعة/i, "⚡"], [/Cache|مخبأ/i, "🗂️"],
+    [/مقبس|Socket/i, "🔌"], [/TDP|طاقة|استهلاك/i, "🔋"], [/شريحة|Chipset/i, "🧭"],
+    [/حجم|Form Factor/i, "📐"], [/ذاكرة|RAM|Channel|قناة/i, "▥"], [/توسعة|PCIe|فتحات/i, "🧷"],
+    [/نوع|Type/i, "🏷️"], [/HDD/i, "💿"], [/SATA/i, "🔗"], [/NVMe|M\.2/i, "💽"],
+    [/سعة|Capacity/i, "📦"], [/VRAM/i, "🖼️"], [/طول|Length|mm/i, "📏"], [/عرض|منافذ|Ports/i, "🔲"],
+    [/قدرة|Wattage|واط/i, "🔋"], [/كفاءة|80 Plus/i, "🌿"], [/كابلات|Cable/i, "🧵"],
+    [/هوائي|Air/i, "🌬️"], [/سائل|Liquid|AIO/i, "💧"], [/RPM|مروحة/i, "🌀"], [/ضجيج|dB/i, "🔇"],
+    [/لوحة الأم|Motherboard/i, "🧩"], [/كرت الشاشة|GPU/i, "🖥️"], [/تهوية/i, "🌬️"]
+  ];
+  for (const [re, icon] of map){ if (re.test(label)) return icon; }
+  return "🔹";
+}
+
 const components = [
   {
     id: "cpu", num: "01", icon: "🧠",
@@ -165,24 +196,36 @@ components.forEach(c => {
         <h2>${c.name} <span class="comp-en">/ ${c.en}</span></h2>
       </div>
     </div>
-    <p class="comp-tagline">${c.tagline}</p>
-    <p class="comp-desc">${c.desc}</p>
-    <div class="spec-grid">
-      ${c.specs.map(s => `
-        <div class="spec-card">
-          <span class="spec-label">${s.label}</span>
-          <span class="spec-value">${s.value}</span>
-        </div>
-      `).join("")}
-    </div>
-    <div class="info-boxes">
-      <div class="info-box fact">
-        <div class="info-box-title">✨ هل تعلم؟</div>
-        <p>${c.fact}</p>
+    <div class="comp-body">
+      <div class="comp-visual">
+        <img src="${photos[c.id]}" alt="صورة ${c.name} الحقيقية" loading="lazy"
+             onerror="this.parentElement.classList.add('img-error')">
+        <span class="comp-visual-badge mono">${c.num}</span>
       </div>
-      <div class="info-box tip">
-        <div class="info-box-title">🔧 نصيحة توافق</div>
-        <p>${c.tip}</p>
+      <div class="comp-content">
+        <p class="comp-tagline">${c.tagline}</p>
+        <p class="comp-desc">${c.desc}</p>
+        <div class="spec-grid">
+          ${c.specs.map(s => `
+            <div class="spec-card">
+              <span class="spec-icon">${getSpecIcon(s.label)}</span>
+              <span class="spec-text">
+                <span class="spec-label">${s.label}</span>
+                <span class="spec-value">${s.value}</span>
+              </span>
+            </div>
+          `).join("")}
+        </div>
+        <div class="info-boxes">
+          <div class="info-box fact">
+            <div class="info-box-title">✨ هل تعلم؟</div>
+            <p>${c.fact}</p>
+          </div>
+          <div class="info-box tip">
+            <div class="info-box-title">🔧 نصيحة توافق</div>
+            <p>${c.tip}</p>
+          </div>
+        </div>
       </div>
     </div>
   `;
